@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Hello World with Socket.IO</title>
+        <!-- 
+            We have set up our server to log messages on connections and disconnections. We now have to 
+            include the client script and initialize the socket object there, so that clients can 
+            establish connections when required. The script is served by our io server at 
+            '/socket.io/socket.io.js'.
+        -->
+        <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+        <script type="text/javascript">
+            var socket = io();
+
+            // handle message from server
+            // Message was a built-in event provided by the API, but is of not much use in a real application, as 
+            // we need to be able to differentiate between events.
+            socket.on('message', (data) => {
+                document.write(data);
+            });
+        </script>
+    </head>
+    <body>
+        <h1>Hello World</h1>
+    </body>
+</html>
