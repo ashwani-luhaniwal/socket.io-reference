@@ -13,11 +13,32 @@
         <script type="text/javascript">
             var socket = io();
 
+            // We can also emit events from the client. To emit an event from your client, use the emit
+            // function on the socket object
+            socket.emit('clientEvent', 'Sent an event from the client!');
+
+            // listener to listen for the testerEvent from the server
+            socket.on('testerEvent', (data) => {
+                document.write(data.description);
+            });
+
             // handle message from server
-            // Message was a built-in event provided by the API, but is of not much use in a real application, as 
-            // we need to be able to differentiate between events.
+            // Message was a built-in event provided by the API, but is of not much use in a real 
+            // application, as we need to be able to differentiate between events.
             socket.on('message', (data) => {
                 document.write(data);
+            });
+
+            // Handle broadcast event
+            /*socket.on('broadcast', (data) => {
+                document.body.innerHTML = '';
+                document.write(data.description);
+            });*/
+
+            // Handle newclientconnect event
+            socket.on('newclientconnect', (data) => {
+                document.body.innerHTML = '';
+                document.write(data.description);
             });
         </script>
     </head>
